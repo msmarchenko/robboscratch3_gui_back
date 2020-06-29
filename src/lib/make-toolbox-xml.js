@@ -755,7 +755,13 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,robot_is_scr
 
 
         }
-
+        ${isExtensionPackActivated?
+        `        <block type="robot_wall_color">
+                      <value name="COLOR">
+                          <shadow type="colour_picker"/>
+                      </value>
+                  </block>`:``
+        }
 
 
         <block type="robot_start_button_pressed">

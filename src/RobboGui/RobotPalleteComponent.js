@@ -92,7 +92,7 @@ class RobotPalleteComponent extends Component {
     console.log("startRobotGetData");
   //  this.props.startRobotGetData(0,this.props.RCA);
 
-   
+
 
   this.props.setRCALocal(this.props.RCA);
 
@@ -146,12 +146,19 @@ componentDidUpdate(){
     var sensors_values_field_list =   this.sensors_values_field_list;
 
     if (this.props.draggable_window[1].isShowing == true){
-
+        //  console.warn(this.props);
+        if(!this.props.VM.sim_ac){
           sensors_values_field_list[0].innerHTML = this.props.RCA.getLeftPath();
           sensors_values_field_list[1].innerHTML = this.props.RCA.getRightPath();
           sensors_values_field_list[2].innerHTML = (this.props.RCA.getButtonStartPushed() == "true")?this.props.intl.formatMessage(messages.true):this.props.intl.formatMessage(messages.false);
-
-
+        }
+        else {
+          var bul = {};bul.ROBOT_SENSORS = 0;
+          sensors_values_field_list[0].innerHTML = this.props.VM.sim_dist_l;
+          sensors_values_field_list[1].innerHTML = this.props.VM.sim_dist_r;
+          sensors_values_field_list[2].innerHTML = (this.props.RCA.getButtonStartPushed() == "true")?this.props.intl.formatMessage(messages.true):this.props.intl.formatMessage(messages.false);
+        }
+        }
           for (let index = 0; index < this.props.robot_sensors.length; index++ ){
 
 
@@ -202,7 +209,7 @@ componentDidUpdate(){
 
 
 
-  }
+//  }
 
   robotGetDataStart(){
 

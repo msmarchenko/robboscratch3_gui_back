@@ -69,7 +69,7 @@ const messages = defineMessages({
         id: 'gui.RobboGui.devices_not_found',
         description: ' ',
         defaultMessage: 'No devices available for connection.'
-    } 
+    }
 });
 
 
@@ -191,7 +191,7 @@ class RobboGui extends Component {
 
     search_panel.style.display = "block";
 
-    
+
 
    this.props.vm.getDCA().searchAllDevices();
 
@@ -281,7 +281,7 @@ class RobboGui extends Component {
           <div className={styles.version}> </div>
 
          {
-              (!this.props.sensorsPalette.sensors_pallete_collapsed)?  <SensorPallete RCA={this.RCA} LCA={this.LCA} QCA={this.QCA} OCA={this.OCA} ACA={this.ACA} />: <SensorPaletteCollapsed />
+              (!this.props.sensorsPalette.sensors_pallete_collapsed)?  <SensorPallete RCA={this.RCA} LCA={this.LCA} QCA={this.QCA} OCA={this.OCA} ACA={this.ACA} VM={this.props.vm}/>: <SensorPaletteCollapsed />
 
 
          }
@@ -303,7 +303,8 @@ class RobboGui extends Component {
            top={this.props.sensorsChooseWindow.sensors_choose_window_drag_top} left={this.props.sensorsChooseWindow.sensors_choose_window_drag_left}
            CallerSensorId={this.props.sensorsChooseWindow.sensors_choose_window_sensor_caller}
            SensorCallerDeviceName={this.props.sensorsChooseWindow.sensors_choose_window_sensor_caller_device_name}
-           CallerSensorType={this.props.sensorsChooseWindow.sensors_choose_window_sensor_caller_type}/>
+           CallerSensorType={this.props.sensorsChooseWindow.sensors_choose_window_sensor_caller_type}
+           Vm={this.props.vm}/>
 
 
 
@@ -319,14 +320,14 @@ class RobboGui extends Component {
 
           </NewDraggableWindowComponent>
 
-         
+
 
          <NewDraggableWindowComponent draggableWindowId={"about-window"} initialCoords={initial_coords_about}>
 
             <AboutWindowComponent VM={this.props.vm} RCA={this.RCA} DCA={this.DCA}/>
 
           </NewDraggableWindowComponent>
-        
+
 
        {/* <button id={`robbo_search_devices`} className={styles.robbo_search_devices} onClick={this.searchDevices.bind(this)}>{this.props.intl.formatMessage(messages.search_devices)} </button>*/}
 
@@ -402,11 +403,16 @@ const mapDispatchToProps = dispatch => ({
 //
 // };
 
-
 export default injectIntl(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withAlert()(RobboGui)));
+)((RobboGui)));
+
+
+/*export default injectIntl(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withAlert()(RobboGui)));*/
 
 // export default connect(
 //         mapStateToProps,
