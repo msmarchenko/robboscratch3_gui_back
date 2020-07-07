@@ -595,7 +595,7 @@ const laboratory  = function (isStage, targetId,isExternalSensorsActivated) {  /
 
 }
 
-const robot  = function (isStage, targetId,isExtensionPackActivated,robot_is_scratchduino) {  //modified_by_Yaroslav  //robot category
+const robot  = function (isStage, targetId,isExtensionPackActivated,is_sim_activated,robot_is_scratchduino) {  //modified_by_Yaroslav  //robot category
 
   const stageSelected = ScratchBlocks.ScratchMsgs.translate(
       'MOTION_STAGE_SELECTED',
@@ -729,7 +729,7 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,robot_is_scr
             </value>
         </block>
 
-        ${isExtensionPackActivated?
+        ${(isExtensionPackActivated||is_sim_activated)?
 
           `<block type="robot_get_rgb_sensor_data">
               <value name="ROBOT_SENSORS_FOR_RGB">
@@ -755,7 +755,7 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,robot_is_scr
 
 
         }
-        ${isExtensionPackActivated?
+        ${is_sim_activated?
         `        <block type="robot_wall_color">
                       <value name="COLOR">
                           <shadow type="colour_picker"/>
@@ -784,7 +784,7 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,robot_is_scr
 
         ${blockSeparator}
 
-        ${isExtensionPackActivated?
+        ${(isExtensionPackActivated||is_sim_activated)?
 
           `<block type="robot_claw_closed">
                 <value name="CLAW_CLOSED_PERCENT">
@@ -1539,6 +1539,7 @@ const makeToolboxXML = function (isStage, targetId,config, categoriesXML,
 
   var  isExternalSensorsActivated = false;
   var  isExtensionPackActivated   = false;
+  var  is_sim_activated           = false;
   var  robot_is_scratchduino      = false;
 
 
@@ -1548,6 +1549,7 @@ const makeToolboxXML = function (isStage, targetId,config, categoriesXML,
 
       isExternalSensorsActivated = config.isExternalSensorsActivated;
       isExtensionPackActivated   = config.isExtensionPackActivated;
+      is_sim_activated           = config.is_sim_activated;
       robot_is_scratchduino      = config.robot_is_scratchduino;
 
 
@@ -1556,7 +1558,7 @@ const makeToolboxXML = function (isStage, targetId,config, categoriesXML,
     const everything = [
         xmlOpen,
 
-        robot(false, targetId,isExtensionPackActivated,robot_is_scratchduino),gap, //modified_by_Yaroslav //toolbox generator main
+        robot(false, targetId,isExtensionPackActivated,is_sim_activated,robot_is_scratchduino),gap, //modified_by_Yaroslav //toolbox generator main
         laboratory(false, targetId,isExternalSensorsActivated),gap, //modified_by_Yaroslav
       //  quadcopter(isStage, targetId), gap, //modified_by_Yaroslav
         otto(false, targetId), gap,

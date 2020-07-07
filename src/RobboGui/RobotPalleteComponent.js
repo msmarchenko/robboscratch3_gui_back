@@ -146,13 +146,14 @@ componentDidUpdate(){
     var sensors_values_field_list =   this.sensors_values_field_list;
 
     if (this.props.draggable_window[1].isShowing == true){
-        //  console.warn(this.props);
+      //    console.error(this.props.VM);
         if(!this.props.VM.sim_ac){
           sensors_values_field_list[0].innerHTML = this.props.RCA.getLeftPath();
           sensors_values_field_list[1].innerHTML = this.props.RCA.getRightPath();
           sensors_values_field_list[2].innerHTML = (this.props.RCA.getButtonStartPushed() == "true")?this.props.intl.formatMessage(messages.true):this.props.intl.formatMessage(messages.false);
         }
         else {
+          console.warn("SEMAG");
           var bul = {};bul.ROBOT_SENSORS = 0;
           sensors_values_field_list[0].innerHTML = this.props.VM.sim_dist_l;
           sensors_values_field_list[1].innerHTML = this.props.VM.sim_dist_r;
@@ -192,8 +193,14 @@ componentDidUpdate(){
 
                 }else{
 
+                    if(this.props.VM.sim_ac)
+                    {
+                      console.warn("TRY_TO_get sensors data");
+                      this.props.VM.getSensorDataFromLastUtil(index);
+                    }
+                    else {
                       sensor_data = this.props.RCA.getSensorData(index);
-
+                    }
                       sensors_values_field_list[3+index].innerHTML = sensor_data;
 
                 }

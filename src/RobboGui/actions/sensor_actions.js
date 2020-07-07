@@ -1,8 +1,23 @@
 var RCA_local;
 var LCA_local;
-
 var robot_get_data_order = true;
 
+
+
+const ActionTriggerSim = function(){
+
+
+  return {
+    type: 'TRIGGER_SIM_EN',
+    payload:{
+
+//        VM:vm,
+        RCA:RCA_local
+    }
+  };
+
+
+}
 
 const ActionTriggerExtensionPack = function(){
 
@@ -776,8 +791,8 @@ export {
     ActionDropColorCorrectorWindow,
     ActionDropDraggableWindow,
     ActionDropNewDraggableWindow, //new drag window
-    ActionTriggerNewDraggableWindow, //new drag window 
-    ActionCreateNewDraggableWindow, //new drag window 
+    ActionTriggerNewDraggableWindow, //new drag window
+    ActionCreateNewDraggableWindow, //new drag window
     ActionTriggerDraggableWindow,
     ActionCreateDraggableWindow ,
     ActionSearchLaboratoryDevices,
@@ -787,7 +802,8 @@ export {
     ActionSetRCALocal,
     ActionSetLCALocal,
     ActionHideNoneScratchduinoBlocks,
-    ActionShowRobboBlocks
+    ActionShowRobboBlocks,
+    ActionTriggerSim
   //  ActionTriggerNeedLanguageReload
 
 };

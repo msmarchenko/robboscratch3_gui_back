@@ -11,6 +11,7 @@ import {ActionSearchRobotDevices} from './actions/sensor_actions';
 import {ActionSearchLaboratoryDevices} from './actions/sensor_actions';
 import {ActionRobotStopSearchProcess} from './actions/sensor_actions';
 import {ActionRobotStopDataRecievingProcess}  from './actions/sensor_actions';
+import {ActionTriggerSim} from './actions/sensor_actions';
 import {ActionTriggerExtensionPack} from './actions/sensor_actions';
 import {ActionTriggerColorCorrectorTable} from './actions/sensor_actions';
 //import {ActionTriggerNeedLanguageReload} from './actions/sensor_actions';
@@ -381,6 +382,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch(ActionTriggerExtensionPack());
       },
 
+      onTriggerSimEn: () => {
+
+          dispatch(ActionTriggerSim());
+        },
 
       onTriggerColorCorrectorTable:  (sensor_caller_id) => {
 
