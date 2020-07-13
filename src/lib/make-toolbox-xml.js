@@ -763,7 +763,8 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,is_sim_activ
                   </block>`:``
         }
 
-
+        ${!is_sim_activated?
+        `
         <block type="robot_start_button_pressed">
 
         </block>
@@ -780,11 +781,13 @@ const robot  = function (isStage, targetId,isExtensionPackActivated,is_sim_activ
             <value name="ROBOT_POSITION">
                 <shadow type="robot_positions"/>
             </value>
-        </block>
+        </block>`:``
+        }
+
 
         ${blockSeparator}
 
-        ${(isExtensionPackActivated||is_sim_activated)?
+        ${(isExtensionPackActivated)?
 
           `<block type="robot_claw_closed">
                 <value name="CLAW_CLOSED_PERCENT">

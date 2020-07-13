@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './RobboMenu.css';
 import classNames from 'classnames';
+import costumeLibraryContent from '../lib/libraries/costumes.json';
+import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {ActionTriggerSim} from './actions/sensor_actions';
 import {ActionTriggerExtensionPack} from './actions/sensor_actions';
 import {ActionTriggerLabExtSensors} from  './actions/sensor_actions';
@@ -9,9 +11,8 @@ import {ActionTriggerColorCorrectorTable} from './actions/sensor_actions';
 import {ActionTriggerDraggableWindow} from './actions/sensor_actions';
 import {ActionTriggerRobboMenu} from './actions/sensor_actions.js';
 import {ActionTriggerNewDraggableWindow} from './actions/sensor_actions'
-
+import Blocks from '../containers/blocks.jsx';
 import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
-
 import {createDiv,createDivShort} from './lib/lib.js';
 
 //import Blockly_Arduino from 'blocks-compiler';
@@ -200,10 +201,27 @@ class RobboMenu extends Component {
 
   }
   triggerSimEn(){
-    console.log("triggerSIMULATOR");
-    this.props.onTriggerSimEn();
+    const item = spriteLibraryContent[12];
+    item.name="Robbo Robot";
     this.is_sim_en=!this.is_sim_en;
+    this.props.VM.runtime.sim_ac=!this.props.VM.runtime.sim_ac;
+    console.warn(this.props.VM.editingTarget);
+    this.props.VM.runtime.util=this.props.VM.editingTarget;
+    if(this.props.VM.runtime.sim_ac)
+      {
+//        let promise = new Promise(resolve => {
+          this.props.VM.addSprite(item.json);
+
+//          console.warn(this.props.send_workspace);
+//          let workspace = this.props.send_workspace.workspace;
+//          console.warn("WORKSPACE!!!");
+//          console.warn(workspace);
+
+//        }
+    }
+    this.props.onTriggerSimEn();
   }
+
   triggerExtensionPack(){
 
     console.log("triggerExtensionPack");
@@ -544,8 +562,8 @@ const mapStateToProps =  state => ({
 
     robbo_menu:state.scratchGui.robbo_menu,
     robot_sensors:state.scratchGui.robot_sensors,
-    settings:state.scratchGui.settings
-
+    settings:state.scratchGui.settings,
+    send_workspace:state.scratchGui.send_workspace
 
   });
 

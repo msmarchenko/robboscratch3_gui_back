@@ -682,6 +682,18 @@ const  ActionFirmwareFlasherPushDevice = function(device){
 
 }
 
+const ActionSendWorkspace= function(workspace){
+
+
+  return {
+    type: 'SEND_WORKSPACE',
+    payload:{
+        workspace:workspace
+    }
+  };
+
+
+}
 const ActionFirmwareFlasherGetDevicesInfo = function(DCA,RCA,LCA,QCA,OCA){
 
  var device = {};
@@ -803,7 +815,8 @@ export {
     ActionSetLCALocal,
     ActionHideNoneScratchduinoBlocks,
     ActionShowRobboBlocks,
-    ActionTriggerSim
+    ActionTriggerSim,
+    ActionSendWorkspace
   //  ActionTriggerNeedLanguageReload
 
 };

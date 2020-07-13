@@ -136,7 +136,7 @@ componentDidUpdate(){
 
   onThisWindowClose(){
 
-    console.log("RobotPalette close");
+//    console.log("RobotPalette close");
     this.props.onRobotPaletteWindowClose(1);
 
   }
@@ -146,17 +146,19 @@ componentDidUpdate(){
     var sensors_values_field_list =   this.sensors_values_field_list;
 
     if (this.props.draggable_window[1].isShowing == true){
-      //    console.error(this.props.VM);
-        if(!this.props.VM.sim_ac){
+          //console.warn(this.props.VM);
+//          console.warn(this.props);
+        if(!this.props.VM.runtime.sim_ac){
           sensors_values_field_list[0].innerHTML = this.props.RCA.getLeftPath();
           sensors_values_field_list[1].innerHTML = this.props.RCA.getRightPath();
           sensors_values_field_list[2].innerHTML = (this.props.RCA.getButtonStartPushed() == "true")?this.props.intl.formatMessage(messages.true):this.props.intl.formatMessage(messages.false);
         }
         else {
-          console.warn("SEMAG");
-          var bul = {};bul.ROBOT_SENSORS = 0;
-          sensors_values_field_list[0].innerHTML = this.props.VM.sim_dist_l;
-          sensors_values_field_list[1].innerHTML = this.props.VM.sim_dist_r;
+
+          var bul = {};bul.ROBOT_SENSORS = 'sensor_trip_meter_left';
+          sensors_values_field_list[0].innerHTML = this.props.VM.runtime._primitives.robot_get_sensor_data(bul,null);
+          bul.ROBOT_SENSORS = 'sensor_trip_meter_right';
+          sensors_values_field_list[1].innerHTML = this.props.VM.runtime._primitives.robot_get_sensor_data(bul,null);
           sensors_values_field_list[2].innerHTML = (this.props.RCA.getButtonStartPushed() == "true")?this.props.intl.formatMessage(messages.true):this.props.intl.formatMessage(messages.false);
         }
         }
@@ -170,7 +172,9 @@ componentDidUpdate(){
 
                 if (this.props.robot_sensors[index].sensor_name == "color"){
 
-
+                  if(this.props.VM.runtime.sim_ac)
+                      sensor_data = this.props.VM.runtime._primitives.getSensorDataFromLastUtil(index);
+                  else
                       sensor_data = this.props.RCA.colorFilter(index);
 
                       if (sensor_data[0] == -1){
@@ -193,14 +197,14 @@ componentDidUpdate(){
 
                 }else{
 
-                    if(this.props.VM.sim_ac)
+                    if(this.props.VM.runtime.sim_ac)
                     {
-                      console.warn("TRY_TO_get sensors data");
-                      this.props.VM.getSensorDataFromLastUtil(index);
+                      sensor_data = this.props.VM.runtime._primitives.getSensorDataFromLastUtil(index);
                     }
                     else {
                       sensor_data = this.props.RCA.getSensorData(index);
                     }
+                    if(typeof(sensor_data)!=='undefined'&&!isNaN(sensor_data))
                       sensors_values_field_list[3+index].innerHTML = sensor_data;
 
                 }

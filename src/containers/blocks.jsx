@@ -25,6 +25,8 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
+import {ActionSendWorkspace} from '../RobboGui/actions/sensor_actions';
+
 import {
     activateTab,
     SOUNDS_TAB_INDEX
@@ -119,6 +121,8 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+
+        this.props.send_workspace(this.workspace);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -325,9 +329,11 @@ class Blocks extends React.Component {
         this.workspace.glowStack(data.id, false);
     }
     onBlockGlowOn (data) {
+      console.warn("onnn"+data);
         this.workspace.glowBlock(data.id, true);
     }
     onBlockGlowOff (data) {
+      console.warn("offf"+data);
         this.workspace.glowBlock(data.id, false);
     }
     onVisualReport (data) {
@@ -350,7 +356,7 @@ class Blocks extends React.Component {
             var config = {};
             config.isExternalSensorsActivated = this.props.robbo_settings.is_lab_ext_enabled;
             config.isExtensionPackActivated   = this.props.extension_pack.is_extension_pack_activated;
-            console.warn("hui3"+this.props.robbo_settings.is_sim_activated);
+    //        console.warn("hui3"+this.props.robbo_settings.is_sim_activated);
             config.is_sim_activated           = this.props.robbo_settings.is_sim_activated;
             config.robot_is_scratchduino      = this.props.robbo_settings.robot_is_scratchduino;
             config.locale = this.props.locale;
@@ -569,6 +575,7 @@ Blocks.propTypes = {
     onOpenConnectionModal: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
+    send_workspace:PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -665,6 +672,9 @@ const mapDispatchToProps = dispatch => ({
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
+    },
+    send_workspace: workspace => {
+        dispatch(ActionSendWorkspace(workspace));
     }
 });
 
