@@ -5,9 +5,51 @@ const categorySeparator = '<sep gap="36"/>';
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const newcat = function (isStage) {
+  /*
+*/
       const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
     return `
     <category name="%{BKY_CATEGORY_ARDUINO}" id="newcat" colour="#5F9EA0" secondaryColour="#5F9EA0">
+
+    <block type="newcat_shag_init">
+        <value name="PIN1">
+          <shadow type="math_number">
+                <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <value name="PIN2">
+          <shadow type="math_number">
+                <field name="NUM">9</field>
+          </shadow>
+        </value>
+        <value name="PIN3">
+          <shadow type="math_number">
+                <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="PIN4">
+          <shadow type="math_number">
+                <field name="NUM">11</field>
+          </shadow>
+        </value>
+        <value name="SHAG_TYPE">
+            <shadow type="shag_type"/>
+        </value>
+    </block>
+
+    <block type="newcat_set_shag">
+        <value name="SPEED">
+          <shadow type="math_number">
+              <field name="NUM">13</field>
+          </shadow>
+        </value>
+
+        <value name="SHAG">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+    </block>
 
         <block type="newcat_set_dig">
             <value name="PIN">
@@ -118,7 +160,7 @@ const newcat = function (isStage) {
 
         <block type="newcat_read_ana">
             <value name="PIN">
-              <shadow type="pin_anal">
+              <shadow type="math_number">
               </shadow>
             </value>
         </block>
@@ -153,7 +195,10 @@ const newcat = function (isStage) {
     </category>
     `;
 };
+/*
 
+
+*/
 const otto = function (isStage, targetId){ //modified_by_Yaroslav  //otto category
 
 const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');

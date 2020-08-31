@@ -122,7 +122,7 @@ class Blocks extends React.Component {
             this.setLocale();
         }
 
-        this.props.send_workspace(this.workspace);
+    //    this.props.send_workspace(this.workspace);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -575,7 +575,7 @@ Blocks.propTypes = {
     onOpenConnectionModal: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
-    send_workspace:PropTypes.func,
+  //  send_workspace:PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -672,10 +672,10 @@ const mapDispatchToProps = dispatch => ({
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
-    },
+    }/*,
     send_workspace: workspace => {
         dispatch(ActionSendWorkspace(workspace));
-    }
+    }*/
 });
 
 export default errorBoundaryHOC('Blocks')(

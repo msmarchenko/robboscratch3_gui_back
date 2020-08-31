@@ -563,7 +563,7 @@ const mapStateToProps =  state => ({
     robbo_menu:state.scratchGui.robbo_menu,
     robot_sensors:state.scratchGui.robot_sensors,
     settings:state.scratchGui.settings,
-    send_workspace:state.scratchGui.send_workspace
+  //  send_workspace:state.scratchGui.send_workspace
 
   });
 
